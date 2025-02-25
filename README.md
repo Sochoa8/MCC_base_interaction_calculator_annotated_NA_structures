@@ -1,29 +1,17 @@
-# MCC_base_interaction_calculator_annotated_NA_structures
-This Python script calculates Matthews Correlation Coefficient (MCC) and other performance metrics for nucleic acid structures. It processes RNApdbee output files to evaluate canonical, non-canonical, and stacking interactions, comparing predicted vs. reference structures.
+# nucleobase_interaction_calculator_annotated_NA_structures
 
-The script uses the following output fies from the RNApdbee webserver (http://rnapdbee.cs.put.poznan.pl)
+## Overview
+This repository contains Python scripts for analyzing nucleic acid structures by processing RNApdbee output files to evaluate canonical, non-canonical, and stacking interactions, comparing predicted vs. reference structures. non-canonical interaction CSV files. 
+
+
+The scripts use the following output fies from the RNApdbee webserver (http://rnapdbee.cs.put.poznan.pl)
 
 - Canonical base pairs (bpseq files)
 - Non-canonical interactions (CSV files)
 - Stacking interactions (CSV files)
-  
-##  Installation
-This script requires **Python 3.1**. Clone the repository to get started:
-```bash
-git clone https://github.com/Sochoa8/MCC_base_interaction_calculator_annotated_NA_structures.git
-cd MCC_base_interaction_calculator_annotated_NA_structures
-```
-## Usage
-Run the script:
-```
-python MCC_scores.py
-```
-- Select (multiple) RNApdbee bpseq and CSV files when prompted.
-- The script will extract base interactions and compute MCC scores.
-- Results are saved in a structured CSV file.
 
 ## Expected Input Files
-The script expects RNApdbee output files named using this pattern:
+The scripts expect RNApdbee output files named using this pattern:
 
 ```filtered_<structure_id>_(af|pdb)[_-](2D-bpseq|non-canonical|stacking).<extension>```
 
@@ -92,6 +80,28 @@ Base-pair; Stack Strength
 A.g1 - A.g2; Strong
 G.c5 - C.c6; Moderate
 ```
+-----------------------------------------
+-----------------------------------------
+#MCC_scores
+
+This Python script calculates Matthews Correlation Coefficient (MCC) and other performance metrics for nucleic acid structures. It processes RNApdbee output files to evaluate canonical, non-canonical, and stacking interactions, comparing predicted vs. reference structures.
+  
+##  Installation
+This script requires **Python 3.1**. Clone the repository to get started:
+```bash
+git clone https://github.com/Sochoa8/MCC_base_interaction_calculator_annotated_NA_structures.git
+cd MCC_base_interaction_calculator_annotated_NA_structures
+```
+## Usage
+Run the script:
+```
+python MCC_scores.py
+```
+- Select (multiple) RNApdbee bpseq and CSV files when prompted.
+- The script will extract base interactions and compute MCC scores.
+- Results are saved in a structured CSV file.
+
+
 
 ##Example Output
 
@@ -109,6 +119,36 @@ The output is saved as a CSV file, summarizing MCC scores and other metrics.
 - **Recall**: Fraction of actual interactions correctly predicted.
 - **F1-score**: Harmonic mean of precision and recall.
 - **Accuracy**: Overall correctness of predictions.
+
+-----------------------------------------
+-----------------------------------------
+# Leontis_Westhof
+
+The script normalizes and counts Leontis-Westhof interactions, groups files by PDB ID (for both AlphaFold and PDB sources), and computes Matthews Correlation Coefficient (MCC) scores comparing predicted versus reference interactions.
+
+Purpose
+- **Extracts and normalizes** the "Leontis-Westhof" interaction strings from semicolon-delimited CSV files.
+- **Groups files by PDB ID** using the naming pattern:  
+  `filtered_<PDB_ID>_<af_or_pdb>-non-canonical.csv`
+- **Aggregates interaction counts** per structure for both AlphaFold (`af`) and PDB (`pdb`) data.
+- **Calculates a manual MCC** for each interaction type based on binary presence across structures.
+- **Outputs two CSV files**:  
+  - `per_structure_interactions.csv`: Detailed interaction counts per structure.  
+  - `interaction_summary.csv`: Summary of interactions with MCC scores and observation counts.
+- **Prints a summary** of the results to the terminal.
+
+### Usage
+Run the script from your terminal:
+```bash
+python leontis_westhof_interaction_analyzer.py
+```
+- A dialog will prompt you to select all non-canonical CSV files from multiple structures (must be pairs) at once.
+- After processing, the script generates:
+```per_structure_interactions.csv```
+```interaction_summary.csv```
+
+A brief summary is printed to the terminal as well.
+
 
 
   
