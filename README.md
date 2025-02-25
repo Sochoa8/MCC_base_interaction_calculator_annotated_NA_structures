@@ -126,7 +126,7 @@ The output is saved as a CSV file, summarizing MCC scores and other metrics.
 
 The script normalizes and counts Leontis-Westhof interactions, groups files by PDB ID (for both AlphaFold and PDB sources), and computes Matthews Correlation Coefficient (MCC) scores comparing predicted versus reference interactions.
 
-Purpose
+##Purpose
 - **Extracts and normalizes** the "Leontis-Westhof" interaction strings from semicolon-delimited CSV files.
 - **Groups files by PDB ID** using the naming pattern:  
   `filtered_<PDB_ID>_<af_or_pdb>-non-canonical.csv`
@@ -137,7 +137,7 @@ Purpose
   - `interaction_summary.csv`: Summary of interactions with MCC scores and observation counts.
 - **Prints a summary** of the results to the terminal.
 
-### Usage
+## Usage
 Run the script from your terminal:
 ```bash
 python leontis_westhof_interaction_analyzer.py
@@ -149,7 +149,30 @@ python leontis_westhof_interaction_analyzer.py
 
 A brief summary is printed to the terminal as well.
 
+##Example Output Files
 
+1. ```per_structure_interactions.csv```
 
-  
+This file provides detailed counts of each Leontis-Westhof interaction per structure and per source (PDB vs. AlphaFold).
+
+| PDB_ID | Source    | Interaction | Count |
+|--------|-----------|-------------|-------|
+| 1ABC   | PDB       | W/H cis     | 5     |
+| 1ABC   | AlphaFold | W/H cis     | 3     |
+| 1ABC   | PDB       | S/W trans   | 2     |
+| 1ABC   | AlphaFold | S/W trans   | 4     |
+| 2XYZ   | PDB       | W/H cis     | 6     |
+| 2XYZ   | AlphaFold | W/H cis     | 6     |
+| 2XYZ   | PDB       | H/S cis     | 1     |
+| 2XYZ   | AlphaFold | H/S cis     | 0     |
+
+2. ```interaction_summary.csv```
+
+This summary file aggregates the interactions across all processed structures, showing the calculated Matthews Correlation Coefficient (MCC) and observation details for each interaction type.
+
+| Interaction | MCC   | Obs_PDB | Obs_AF | Total_Pairs |
+|-------------|-------|---------|--------|-------------|
+| S/W trans   | 0.234 | 2       | 4      | 5           |
+| H/S cis     | 0.000 | 1       | 0      | 5           |
+| W/H cis     | 0.567 | 11      | 9      | 8           |
 
