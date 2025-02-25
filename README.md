@@ -82,7 +82,7 @@ G.c5 - C.c6; Moderate
 ```
 -----------------------------------------
 -----------------------------------------
-#MCC_scores
+# MCC_scores
 
 This Python script calculates Matthews Correlation Coefficient (MCC) and other performance metrics for nucleic acid structures. It processes RNApdbee output files to evaluate canonical, non-canonical, and stacking interactions, comparing predicted vs. reference structures.
   
